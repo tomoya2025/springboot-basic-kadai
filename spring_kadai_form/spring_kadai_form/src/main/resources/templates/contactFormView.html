@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>お問い合わせフォーム</title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			h2{
+				width: 420px;
+				margin: 0 auto;
+			}
+			form{
+				width: 420px;
+				margin: 0 auto;
+			}
+			div{
+				display: flex;
+				align-items: center;
+				margin-bottom: 10px;
+			}
+			#name{
+				margin-left: 80px;
+			}
+			#email{
+				margin-left: 16px;
+			}
+			#error{
+				color: red;
+				margin-left: 130px;;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>お問い合わせフォーム</h2>
+		<form th:action="@{/confirm}" method="POST" th:object="${contactForm}">
+			<div>
+				<label for="name">お名前</label>
+			    <input type="text" id="name" name="name" th:field="*{name}">
+			</div>
+			<div id="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+		    
+		    <div>
+			    <label for="email">メールアドレス</label>
+			    <input type="text" id="email" name="email" th:field="*{email}">
+			</div>    
+			<div id="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		    
+		    <div>
+			    <label for="message">お問い合わせ内容</label>
+			    <textarea id="message" name="message" cols="30" rows="10"  th:field="*{message}"></textarea>
+			</div>
+			 <div id="error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+		
+			<button type="submit">送信</button>
+		</form>
+	</body>
+</html>
